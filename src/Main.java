@@ -4,11 +4,10 @@ import java.util.Scanner;
 public class Main {
     // array of products
     public static product[] products = new product[100];
-    // array of products in the cart
-    public static product[] cart = new product[100];
+    // array of products in the cart including the quantity
+    public static cartProduct[] cart = new cartProduct[100];
     // array of coupons
     public static coupon[] coupons = new coupon[100];
-
     //variable for continue shopping
     public static boolean continueShopping = true;
     // variable to control the main loop
@@ -57,8 +56,6 @@ public class Main {
             }
         }
     }
-
-
     static void addProducts() {
         // do while to continue adding products
         do {
@@ -113,14 +110,29 @@ public class Main {
             // ask for the id of the product to add to the cart
             System.out.println("Ingrese el id del producto que desea agregar al carrito");
             int id = scanner.nextInt();
+            // ask the product to add to the cart
+            System.out.println("Ingrese la cantidad del producto que desea agregar al carrito");
+            int quantity = scanner.nextInt();
             // add the product to the cart
             for (int i = 0; i < products.length; i++) {
                 if (products[i] != null) {
                     if (products[i].getId() == id) {
+                        // check if the product is already in the cart
+                        boolean productAlreadyInCart = false;
                         for (int j = 0; j < cart.length; j++) {
-                            if (cart[j] == null) {
-                                cart[j] = products[i];
-                                break;
+                            if (cart[j] != null) {
+                                if (cart[j].getId() == id) {
+                                    productAlreadyInCart = true;
+                                    cart[j].setQuantity(cart[j].getQuantity() + quantity);
+                                }
+                            }
+                        }
+                        if (!productAlreadyInCart) {
+                            for (int j = 0; j < cart.length; j++) {
+                                if (cart[j] == null) {
+                                    cart[j] = new cartProduct(products[i].getId(), products[i].getName(), products[i].getPrice(), quantity);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -134,14 +146,39 @@ public class Main {
             }
         } while (continueShopping);
         // print the cart and the total price
+        System.out.println("Carrito");
         double totalPrice = 0;
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
-                System.out.println(cart[i].getName() + " - " + cart[i].getPrice());
-                totalPrice += cart[i].getPrice();
+                System.out.println(cart[i].getId() + " - " + cart[i].getName() + " - " + cart[i].getPrice() + " - " + cart[i].getQuantity());
+                totalPrice += cart[i].getPrice() * cart[i].getQuantity();
             }
         }
         System.out.println("Total: " + totalPrice);
+        // ask if the user wants to apply a coupon
+        System.out.println("Desea aplicar un cupon? (s/n)");
+        String answer = scanner.next();
+        if (answer.equals("s")) {
+            // show the coupons and their index as the id
+            for (int i = 0; i < coupons.length; i++) {
+                if (coupons[i] != null) {
+                    System.out.println(coupons[i].getId() + " - " + coupons[i].getName() + " - " + coupons[i].getDiscount());
+                }
+            }
+            // ask for the id of the coupon to apply
+            System.out.println("Ingrese el id del cupon que desea aplicar");
+            int id = scanner.nextInt();
+            // apply the coupon to the total price using percentage
+            for (int i = 0; i < coupons.length; i++) {
+                if (coupons[i] != null) {
+                    if (coupons[i].getId() == id) {
+                        totalPrice -= totalPrice * coupons[i].getDiscount() / 100;
+                    }
+                }
+            }
+            System.out.println("Total con descuento: " + totalPrice);
+
+        }
     }
     private static void showReports() {
         System.out.println("Realizar reporte");
