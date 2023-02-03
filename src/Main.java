@@ -150,8 +150,7 @@ public class Main {
         printShoppingCart();
     }
     private static void showReports() {
-        System.out.println("Realizar reporte");
-        // show the products arranged by times sold
+        // show the products ordered by the higher times sold
         System.out.println("Productos más vendidos");
         for (int i = 0; i < products.length; i++) {
             if (products[i] != null) {
@@ -191,7 +190,7 @@ public class Main {
                 // apply the coupon to the total price using percentage
                 for (int i = 0; i < coupons.length; i++) {
                     if (coupons[i] != null) {
-                        if (coupons[i].getId() == id) {
+                        if (coupons[i].getId().equals(id)) {
                             discountSelected = coupons[i].getDiscount();
                         }
                     }

@@ -22,14 +22,13 @@ public class AddCoupon {
             discount = scanner.nextDouble();
         }
         // create a new coupon
-        System.out.println("Ingrese el id del cupon");
-        int id = scanner.nextInt();
+        String id = randomIdGenerator.generateId();
         // check if the id dont exist
         for (int i = 0; i < Main.coupons.length; i++) {
             if (Main.coupons[i] != null) {
-                if (Main.coupons[i].getId() == id) {
-                    System.out.println("El id del cupon ya existe");
-                    return;
+                if (Main.coupons[i].getId().equals(id)) {
+                    id = randomIdGenerator.generateId();
+                    i = 0;
                 }
             }
         }

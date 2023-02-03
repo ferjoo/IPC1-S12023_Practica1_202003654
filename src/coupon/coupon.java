@@ -4,9 +4,9 @@ public class coupon {
     // attributes
     private String name;
     private double discount;
-    private int id;
+    private String id;
     // constructor
-    public coupon(String name, double discount, int id) {
+    public coupon(String name, double discount, String id) {
         this.name = name;
         this.discount = discount;
         this.id = id;
@@ -26,7 +26,7 @@ public class coupon {
         this.discount = discount;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
     public void setId() {
