@@ -1,4 +1,6 @@
 import coupon.coupon;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.util.Scanner;
 public class Main {
@@ -145,9 +147,23 @@ public class Main {
                 continueShopping = false;
             }
         } while (continueShopping);
+        printShoppingCart();
+    }
+    private static void showReports() {
+        System.out.println("Realizar reporte");
+        // show the products arranged by times sold
+        System.out.println("Productos más vendidos");
+        for (int i = 0; i < products.length; i++) {
+            if (products[i] != null) {
+                System.out.println(products[i].getId() + " - " + products[i].getName() + " - " + products[i].getPrice() + " - " + products[i].getTimesSold());
+            }
+        }
+    }
+    private static void printShoppingCart() {
+        double totalPrice = 0;
+        double discountSelected = 0;
         // print the cart and the total price
         System.out.println("Carrito");
-        double totalPrice = 0;
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
                 System.out.println(cart[i].getId() + " - " + cart[i].getName() + " - " + cart[i].getPrice() + " - " + cart[i].getQuantity());
@@ -155,45 +171,73 @@ public class Main {
             }
         }
         System.out.println("Total: " + totalPrice);
-        // ask if the user wants to apply a coupon
-        System.out.println("Desea aplicar un cupon? (s/n)");
+        // ask to confirm the purchase
+        System.out.println("Desea realizar la compra? (s/n)");
         String answer = scanner.next();
         if (answer.equals("s")) {
-            // show the coupons and their index as the id
-            for (int i = 0; i < coupons.length; i++) {
-                if (coupons[i] != null) {
-                    System.out.println(coupons[i].getId() + " - " + coupons[i].getName() + " - " + coupons[i].getDiscount());
-                }
-            }
-            // ask for the id of the coupon to apply
-            System.out.println("Ingrese el id del cupon que desea aplicar");
-            int id = scanner.nextInt();
-            // apply the coupon to the total price using percentage
-            for (int i = 0; i < coupons.length; i++) {
-                if (coupons[i] != null) {
-                    if (coupons[i].getId() == id) {
-                        totalPrice -= totalPrice * coupons[i].getDiscount() / 100;
+            // ask if the user wants to apply a coupon
+            System.out.println("Desea aplicar un cupon? (s/n)");
+            String answerDiscount = scanner.next();
+            if (answerDiscount.equals("s")) {
+                // show the coupons and their index as the id
+                for (int i = 0; i < coupons.length; i++) {
+                    if (coupons[i] != null) {
+                        System.out.println(coupons[i].getId() + " - " + coupons[i].getName() + " - " + coupons[i].getDiscount());
                     }
                 }
+                // ask for the id of the coupon to apply
+                System.out.println("Ingrese el id del cupon que desea aplicar");
+                int id = scanner.nextInt();
+                // apply the coupon to the total price using percentage
+                for (int i = 0; i < coupons.length; i++) {
+                    if (coupons[i] != null) {
+                        if (coupons[i].getId() == id) {
+                            discountSelected = coupons[i].getDiscount();
+                        }
+                    }
+                }
+                System.out.println("Total con descuento: " + totalPrice);
             }
-            System.out.println("Total con descuento: " + totalPrice);
-
+            printInvoice(totalPrice, discountSelected);
         }
     }
-    private static void showReports() {
-        System.out.println("Realizar reporte");
-        // show the products arranged by times sold
-        // bubble sort
-        for (int i = 0; i < products.length; i++) {
-            for (int j = 0; j < products.length - 1; j++) {
-                if (products[j] != null && products[j + 1] != null) {
-                    if (products[j].getTimesSold() < products[j + 1].getTimesSold()) {
-                        product temp = products[j];
-                        products[j] = products[j + 1];
-                        products[j + 1] = temp;
-                    }
-                }
+    private static void printInvoice(Double total, Double discount) {
+        // print the invoice
+        Double totalWithDiscount = total - ((total * discount)/100);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("Ingrese su nombre");
+        String name = scanner.next();
+        System.out.println("Ingrese su nit");
+        String nit = scanner.next();
+        System.out.println("==================================");
+        System.out.println("Factura");
+        System.out.println("Factura afiliada a FEL");
+        System.out.println("Tienda SUPER-25");
+        System.out.println("Nit: "+ nit);
+        System.out.println("Nombre: "+ name);
+        System.out.println("Fecha: " + dateFormat.format(now));
+        System.out.println("Productos");
+        System.out.println("Id - Nombre - Precio - Cantidad");
+        for (int i = 0; i < cart.length; i++) {
+            if (cart[i] != null) {
+                System.out.println(cart[i].getId() + " - " + cart[i].getName() + " - " + cart[i].getPrice() + " - " + cart[i].getQuantity());
             }
+        }
+        System.out.println("Subtotal: " + total);
+        if(discount > 0) {
+            System.out.println("Descuento: " + discount);
+        }
+        System.out.println("Total: " + totalWithDiscount);
+        System.out.println("Gracias por su compra");
+        System.out.println("==================================");
+        updateReport();
+    }
+    private static void updateReport() {
+        System.out.println("Actualizando reporte");
+        // clear the cart
+        for (int i = 0; i < cart.length; i++) {
+            cart[i] = null;
         }
     }
 }
