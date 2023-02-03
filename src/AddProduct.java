@@ -1,3 +1,5 @@
+import helpers.randomIdGenerator;
+
 import java.util.Scanner;
 public class AddProduct {
     public static void main() {

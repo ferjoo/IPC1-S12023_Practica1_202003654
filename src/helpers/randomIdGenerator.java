@@ -1,3 +1,5 @@
+package helpers;
+
 public class randomIdGenerator {
     // create a 4 character random id mixed with numbers and letters using only uppercase and always with 2 letters and 2 numbers
     public static String generateId() {

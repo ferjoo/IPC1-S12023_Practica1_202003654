@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import coupon.coupon;
+import helpers.randomIdGenerator;
+
 public class AddCoupon {
     public static void main() {
         Scanner scanner = new Scanner(System.in);
