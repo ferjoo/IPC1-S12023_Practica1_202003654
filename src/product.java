@@ -1,11 +1,11 @@
 public class product {
     // atrbutes autoincrement id, name, price
-    private int id;
+    private String id;
     private String name;
     private double price;
     private int timesSold;
     // constructor
-    public product(String name, double price, int id, int timesSold) {
+    public product(String name, double price, String id, int timesSold) {
         this.name = name;
         this.price = price;
         this.id = id;
@@ -13,10 +13,10 @@ public class product {
     }
 
     // getters and setters
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getName() {

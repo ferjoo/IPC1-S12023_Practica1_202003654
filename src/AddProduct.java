@@ -12,28 +12,23 @@ public class AddProduct {
             System.out.println("El precio debe ser mayor a 0");
             price = scanner.nextDouble();
         }
-        System.out.println("Ingrese el id del producto");
-        int id = scanner.nextInt();
-        product newProduct = new product(name, price, id, 0);
-        // check if the id already exists
-        boolean idAlreadyExists = false;
+        String id = randomIdGenerator.generateId();
+        // check if the id dont exist
         for (int i = 0; i < Main.products.length; i++) {
             if (Main.products[i] != null) {
-                if (Main.products[i].getId() == id) {
-                    idAlreadyExists = true;
+                if (Main.products[i].getId().equals(id)) {
+                    id = randomIdGenerator.generateId();
+                    i = 0;
                 }
             }
         }
+        product newProduct = new product(name, price, id, 0);
         // if the id dont exist add the product to the cart
-        if (!idAlreadyExists) {
-            for (int i = 0; i < Main.products.length; i++) {
-                if (Main.products[i] == null) {
-                    Main.products[i] = newProduct;
-                    break;
-                }
+        for (int i = 0; i < Main.products.length; i++) {
+            if (Main.products[i] == null) {
+                Main.products[i] = newProduct;
+                break;
             }
-        } else {
-            System.out.println("Ya existe un producto con ese identificador");
         }
 
     }

@@ -71,6 +71,8 @@ public class Main {
                 continueAddingProducts = false;
             }
         } while (continueAddingProducts);
+        // reset the variable
+        continueAddingProducts = true;
         // show the products
         System.out.println("Productos");
         for (int i = 0; i < products.length; i++) {
@@ -111,19 +113,19 @@ public class Main {
             }
             // ask for the id of the product to add to the cart
             System.out.println("Ingrese el id del producto que desea agregar al carrito");
-            int id = scanner.nextInt();
+            String id = scanner.next();
             // ask the product to add to the cart
             System.out.println("Ingrese la cantidad del producto que desea agregar al carrito");
             int quantity = scanner.nextInt();
-            // add the product to the cart
+            // add the product to the cart and check if the product is already in the cart or the id is valid
             for (int i = 0; i < products.length; i++) {
                 if (products[i] != null) {
-                    if (products[i].getId() == id) {
+                    if (products[i].getId().equals(id)) {
                         // check if the product is already in the cart
                         boolean productAlreadyInCart = false;
                         for (int j = 0; j < cart.length; j++) {
                             if (cart[j] != null) {
-                                if (cart[j].getId() == id) {
+                                if (cart[j].getId().equals(products[i].getId())) {
                                     productAlreadyInCart = true;
                                     cart[j].setQuantity(cart[j].getQuantity() + quantity);
                                 }
@@ -147,6 +149,8 @@ public class Main {
                 continueShopping = false;
             }
         } while (continueShopping);
+        // reset the variable
+        continueShopping = true;
         printShoppingCart();
     }
     private static void showReports() {
@@ -186,7 +190,7 @@ public class Main {
                 }
                 // ask for the id of the coupon to apply
                 System.out.println("Ingrese el id del cupon que desea aplicar");
-                int id = scanner.nextInt();
+                String id = scanner.next();
                 // apply the coupon to the total price using percentage
                 for (int i = 0; i < coupons.length; i++) {
                     if (coupons[i] != null) {
@@ -241,7 +245,7 @@ public class Main {
             if (cart[i] != null) {
                 for (int j = 0; j < products.length; j++) {
                     if (products[j] != null) {
-                        if (products[j].getId() == cart[i].getId()) {
+                        if (products[j].getId().equals(cart[i].getId())) {
                             products[j].setTimesSold(products[j].getTimesSold() + cart[i].getQuantity());
                         }
                     }
