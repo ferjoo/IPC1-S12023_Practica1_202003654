@@ -1,6 +1,7 @@
 import coupon.coupon;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import helpers.validateNit;
 
 import java.util.Scanner;
 public class Main {
@@ -213,8 +214,8 @@ public class Main {
         LocalDateTime now = LocalDateTime.now();
         System.out.println("Ingrese su nombre");
         String name = scanner.next();
-        System.out.println("Ingrese su nit");
-        String nit = scanner.next();
+        // use the validateNit helper
+        String nit = validateNit.validateNit();
         System.out.println("==================================");
         System.out.println("Factura");
         System.out.println("Factura afiliada a FEL");
