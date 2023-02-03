@@ -199,6 +199,8 @@ public class Main {
                 System.out.println("Total con descuento: " + totalPrice);
             }
             printInvoice(totalPrice, discountSelected);
+        } else {
+            clearCart();
         }
     }
     private static void printInvoice(Double total, Double discount) {
@@ -235,7 +237,21 @@ public class Main {
     }
     private static void updateReport() {
         System.out.println("Actualizando reporte");
-        // clear the cart
+        // update the times sold of the products in the products array by the quantity of the product in the cart
+        for (int i = 0; i < cart.length; i++) {
+            if (cart[i] != null) {
+                for (int j = 0; j < products.length; j++) {
+                    if (products[j] != null) {
+                        if (products[j].getId() == cart[i].getId()) {
+                            products[j].setTimesSold(products[j].getTimesSold() + cart[i].getQuantity());
+                        }
+                    }
+                }
+            }
+        }
+        clearCart();
+    }
+    private static void clearCart() {
         for (int i = 0; i < cart.length; i++) {
             cart[i] = null;
         }

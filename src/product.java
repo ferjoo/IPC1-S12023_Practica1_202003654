@@ -37,6 +37,6 @@ public class product {
         return timesSold;
     }
     public void setTimesSold(int i) {
-        this.timesSold = timesSold;
+        this.timesSold = i;
     }
 }
