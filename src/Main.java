@@ -47,6 +47,9 @@ public class Main {
                             makeAPurchase();
                             break;
                         case 4:
+                            showReports();
+                            break;
+                        case 5:
                             System.out.println("Gracias por usar la tienda Super-25");
                             exit = true;
                             break;
@@ -78,8 +81,7 @@ public class Main {
                 continueAddingProducts = false;
             } else if (!answer.equals("s")) {
                 System.out.println("Opcion invalida");
-            } else {
-                System.out.println("Opcion invalida");
+                continueAddingProducts = false;
             }
         } while (continueAddingProducts);
         // reset the variable
@@ -102,6 +104,9 @@ public class Main {
             System.out.println("Desea agregar otro cupon? (s/n)");
             String answer = scanner.next();
             if (answer.equals("n")) {
+                continueAddingCoupons = false;
+            } else if (!answer.equals("s")) {
+                System.out.println("Opcion invalida");
                 continueAddingCoupons = false;
             }
         } while (continueAddingCoupons);
@@ -232,7 +237,8 @@ public class Main {
                         }
                     }
                 }
-                System.out.println("Total con descuento: " + totalPrice);
+                System.out.println("Total: " + totalPrice);
+                System.out.println("Descuento: " + discountSelected);
             }
             printInvoice(totalPrice, discountSelected);
         } else {
