@@ -88,6 +88,7 @@ public class Main {
         continueAddingProducts = true;
         // show the products
         System.out.println("Productos");
+        System.out.println("ID - Nombre - Precio");
         for (int i = 0; i < products.length; i++) {
             if (products[i] != null) {
                 System.out.println(products[i].getId() + " - " + products[i].getName() + " - " + products[i].getPrice());
@@ -111,6 +112,8 @@ public class Main {
             }
         } while (continueAddingCoupons);
         // show the coupons
+        System.out.println("Cupones");
+        System.out.println("ID - Nombre - Descuento");
         for (int i = 0; i < coupons.length; i++) {
             if (coupons[i] != null) {
                 System.out.println(coupons[i].getId() + " - " + coupons[i].getName() + " - " + coupons[i].getDiscount());
@@ -120,6 +123,7 @@ public class Main {
     private static void makeAPurchase() {
         System.out.println("Realizar venta");
         // do while to continue shopping
+        System.out.println("ID - Nombre - Precio");
         do {
             // show products and prices and their index as the id
             for (int i = 0; i < products.length; i++) {
@@ -193,6 +197,7 @@ public class Main {
             }
         }
         // print the products sorted by times sold
+        System.out.println("Nombre - Veces vendido");
         for (int i = 0; i < productsTimesSold.length; i++) {
             if (productsTimesSold[i] != null) {
                 System.out.println(productsTimesSold[i].getName() + " - " + productsTimesSold[i].getTimesSold());
@@ -205,6 +210,7 @@ public class Main {
         double discountSelected = 0;
         // print the cart and the total price
         System.out.println("Carrito");
+        System.out.println("Id - Nombre - Precio - Cantidad");
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
                 System.out.println(cart[i].getId() + " - " + cart[i].getName() + " - " + cart[i].getPrice() + " - " + cart[i].getQuantity());
@@ -221,6 +227,8 @@ public class Main {
             String answerDiscount = scanner.next();
             if (answerDiscount.equals("s")) {
                 // show the coupons and their index as the id
+                System.out.println("Cupones disponibles");
+                System.out.println("ID - Nombre - Descuento");
                 for (int i = 0; i < coupons.length; i++) {
                     if (coupons[i] != null) {
                         System.out.println(coupons[i].getId() + " - " + coupons[i].getName() + " - " + coupons[i].getDiscount());
