@@ -155,13 +155,34 @@ public class Main {
         printShoppingCart();
     }
     private static void showReports() {
-        // show the products ordered by the higher times sold
-        System.out.println("Productos más vendidos");
+        System.out.println("Reporte de prodcutos");
+        product[] productsSortByTimesSold = new product[100];
+        // check each product on products array and if the current product times sold is greater than the last product on productTimesSold array check the item above and if its higher check the next until the item is lower and insert the current product on that position
         for (int i = 0; i < products.length; i++) {
             if (products[i] != null) {
-                System.out.println(products[i].getId() + " - " + products[i].getName() + " - " + products[i].getPrice() + " - " + products[i].getTimesSold());
+                for (int j = 0; j < productsSortByTimesSold.length; j++) {
+                    if (productsSortByTimesSold[j] == null) {
+                        productsSortByTimesSold[j] = products[i];
+                        break;
+                    } else {
+                        if (products[i].getTimesSold() > productsSortByTimesSold[j].getTimesSold()) {
+                            for (int k = productsSortByTimesSold.length - 1; k > j; k--) {
+                                productsSortByTimesSold[k] = productsSortByTimesSold[k - 1];
+                            }
+                            productsSortByTimesSold[j] = products[i];
+                            break;
+                        }
+                    }
+                }
             }
         }
+        // print the products sorted by times sold
+        for (int i = 0; i < productsSortByTimesSold.length; i++) {
+            if (productsSortByTimesSold[i] != null) {
+                System.out.println(productsSortByTimesSold[i].getId() + " - " + productsSortByTimesSold[i].getName() + " - " + productsSortByTimesSold[i].getTimesSold());
+            }
+        }
+
     }
     private static void printShoppingCart() {
         double totalPrice = 0;
