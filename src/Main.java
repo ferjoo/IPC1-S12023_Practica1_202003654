@@ -24,11 +24,11 @@ public class Main {
     // scanner
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println("BIENVENIDO A LA TIENDA SUPER-25");
         // main loop
         while (!exit) {
             // check if the user is logged in
             if (loggedIn) {
+                System.out.println("BIENVENIDO A LA TIENDA SUPER-25");
                 // invoke the main menu method
                 MainMenu.main();
                 int option = scanner.nextInt();
@@ -156,20 +156,21 @@ public class Main {
     }
     private static void showReports() {
         System.out.println("Reporte de prodcutos");
-        product[] productsSortByTimesSold = new product[100];
+        // products array for sorting
+        reportProduct[] productsTimesSold = new reportProduct[100];
         // check each product on products array and if the current product times sold is greater than the last product on productTimesSold array check the item above and if its higher check the next until the item is lower and insert the current product on that position
         for (int i = 0; i < products.length; i++) {
             if (products[i] != null) {
-                for (int j = 0; j < productsSortByTimesSold.length; j++) {
-                    if (productsSortByTimesSold[j] == null) {
-                        productsSortByTimesSold[j] = products[i];
+                for (int j = 0; j < productsTimesSold.length; j++) {
+                    if (productsTimesSold[j] == null) {
+                        productsTimesSold[j] = new reportProduct(products[i].getName(), products[i].getTimesSold());
                         break;
                     } else {
-                        if (products[i].getTimesSold() > productsSortByTimesSold[j].getTimesSold()) {
-                            for (int k = productsSortByTimesSold.length - 1; k > j; k--) {
-                                productsSortByTimesSold[k] = productsSortByTimesSold[k - 1];
+                        if (products[i].getTimesSold() > productsTimesSold[j].getTimesSold()) {
+                            for (int k = productsTimesSold.length - 1; k > j; k--) {
+                                productsTimesSold[k] = productsTimesSold[k - 1];
                             }
-                            productsSortByTimesSold[j] = products[i];
+                            productsTimesSold[j] = new reportProduct(products[i].getName(), products[i].getTimesSold());
                             break;
                         }
                     }
@@ -177,9 +178,9 @@ public class Main {
             }
         }
         // print the products sorted by times sold
-        for (int i = 0; i < productsSortByTimesSold.length; i++) {
-            if (productsSortByTimesSold[i] != null) {
-                System.out.println(productsSortByTimesSold[i].getId() + " - " + productsSortByTimesSold[i].getName() + " - " + productsSortByTimesSold[i].getTimesSold());
+        for (int i = 0; i < productsTimesSold.length; i++) {
+            if (productsTimesSold[i] != null) {
+                System.out.println(productsTimesSold[i].getName() + " - " + productsTimesSold[i].getTimesSold());
             }
         }
 
@@ -261,7 +262,7 @@ public class Main {
         updateReport();
     }
     private static void updateReport() {
-        System.out.println("Actualizando reporte");
+        System.out.println("Actualizando productos");
         // update the times sold of the products in the products array by the quantity of the product in the cart
         for (int i = 0; i < cart.length; i++) {
             if (cart[i] != null) {
