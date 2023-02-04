@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09e645e0-298c-467d-9965-35f7781d1e2a" name="Changes" comment="Addimg product constructor">
-      <change afterPath="$PROJECT_DIR$/src/reportProduct.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helpers/validateInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AddCoupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddCoupon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AddProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AddProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +98,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>264</line>
+          <line>274</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

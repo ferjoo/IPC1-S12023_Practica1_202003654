@@ -2,6 +2,7 @@ import coupon.coupon;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import helpers.validateNit;
+import java.util.InputMismatchException;
 
 import java.util.Scanner;
 public class Main {
@@ -24,6 +25,7 @@ public class Main {
     // scanner
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+
         // main loop
         while (!exit) {
             // check if the user is logged in
@@ -31,28 +33,32 @@ public class Main {
                 System.out.println("BIENVENIDO A LA TIENDA SUPER-25");
                 // invoke the main menu method
                 MainMenu.main();
-                int option = scanner.nextInt();
-                switch (option) {
-                    case 1:
-                        addProducts();
-                        break;
-                    case 2:
-                        addCoupons();
-                        break;
-                    case 3:
-                        makeAPurchase();
-                        break;
-                    case 4:
-                        showReports();
-                        break;
-                    case 5:
-                        System.out.println("Salir");
-                        exit = true;
-                        break;
-                    default:
-                        System.out.println("Opción inválida");
-                        break;
+                // try catch to validate the option and retry if it's not valid
+                try {
+                    int option = scanner.nextInt();
+                    switch (option) {
+                        case 1:
+                            addProducts();
+                            break;
+                        case 2:
+                            addCoupons();
+                            break;
+                        case 3:
+                            makeAPurchase();
+                            break;
+                        case 4:
+                            System.out.println("Gracias por usar la tienda Super-25");
+                            exit = true;
+                            break;
+                        default:
+                            System.out.println("Opcion invalida");
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Opcion invalida");
+                    scanner.next();
                 }
+
             } else {
                 System.out.println("Usuario o contraseña incorrectos");
                 loggedIn = Login.main();
@@ -70,6 +76,10 @@ public class Main {
             String answer = scanner.next();
             if (answer.equals("n")) {
                 continueAddingProducts = false;
+            } else if (!answer.equals("s")) {
+                System.out.println("Opcion invalida");
+            } else {
+                System.out.println("Opcion invalida");
             }
         } while (continueAddingProducts);
         // reset the variable
