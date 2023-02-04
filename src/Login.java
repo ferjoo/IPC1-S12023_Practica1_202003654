@@ -8,7 +8,7 @@ public class Login {
         System.out.println("Ingrese su contraseña");
         String password = scanner.nextLine();
         // check if the user and password are correct
-        if (user.equals("admin") && password.equals("1234")) {
+        if (user.equals("cajero_202003654") && password.equals("ipc1_202003654")) {
             // return true if the user is logged in
             return true;
         } else {
