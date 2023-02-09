@@ -36,7 +36,7 @@ public class AddCoupon {
                 }
             }
             coupon newCoupon = new coupon(name, discount, id);
-            // if the id dont exist add the coupon to the cart
+            // add new coupon to the coupons array
             for (int i = 0; i < Main.coupons.length; i++) {
                 if (Main.coupons[i] == null) {
                     Main.coupons[i] = newCoupon;

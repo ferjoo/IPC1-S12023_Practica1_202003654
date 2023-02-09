@@ -27,7 +27,7 @@ public class AddProduct {
                 }
             }
             product newProduct = new product(name, price, id, 0);
-            // if the id dont exist add the product to the cart
+            // add new product to the products array
             for (int i = 0; i < Main.products.length; i++) {
                 if (Main.products[i] == null) {
                     Main.products[i] = newProduct;
