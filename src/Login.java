@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Login {
-    public static boolean main() {
+    public static boolean main(String username, String pass) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Inicio de sesión tienda SUPER-25");
         System.out.println("Ingrese su usuario");
@@ -8,7 +8,7 @@ public class Login {
         System.out.println("Ingrese su contraseña");
         String password = scanner.nextLine();
         // check if the user and password are correct
-        if (user.equals("cajero_202003654") && password.equals("ipc1_202003654")) {
+        if (user.equals(username) && password.equals(pass)) {
             // return true if the user is logged in
             return true;
         } else {

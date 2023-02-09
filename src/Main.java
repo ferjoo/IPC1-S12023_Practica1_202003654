@@ -6,6 +6,9 @@ import java.util.InputMismatchException;
 
 import java.util.Scanner;
 public class Main {
+    // username and password
+    public static String username = "cajero_202003654";
+    public static String password = "ipc1_202003654";
     // array of products
     public static product[] products = new product[100];
     // array of products in the cart including the quantity
@@ -21,7 +24,7 @@ public class Main {
     // variable to continue adding products
     public static boolean continueAddingProducts = true;
     // invoke the login method
-    public static boolean loggedIn = Login.main();
+    public static boolean loggedIn = Login.main(username, password);
     // scanner
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
@@ -64,7 +67,7 @@ public class Main {
 
             } else {
                 System.out.println("Usuario o contraseña incorrectos");
-                loggedIn = Login.main();
+                loggedIn = Login.main(username, password);
             }
         }
     }
@@ -263,6 +266,7 @@ public class Main {
         // use the validateNit helper
         String nit = validateNit.validateNit();
         System.out.println("==================================");
+        System.out.println("Atendido por: " + username);
         System.out.println("Factura");
         System.out.println("Factura afiliada a FEL");
         System.out.println("Tienda SUPER-25");
